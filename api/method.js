@@ -41,8 +41,8 @@ class ApiMethod{
 	};
 
 	static normalizeParams(params){
-		let required = [];
-		let all = [];
+		let required = [],
+			all = [];
 
 		for(let name in params){
 			if(params.hasOwnProperty(name)){
@@ -76,7 +76,7 @@ class ApiMethod{
 
 	static prepareParams(query, params){
 		let prepared = Object.create(params),
-			i;
+			i, param, qval, val;
 
 		//checking required
 		for(i = 0; i < params.required.length; i++)
@@ -84,9 +84,8 @@ class ApiMethod{
 
 		//preparing
 		for(i = 0; i < params.all.length; i++){
-			let param = params.all[i],
-				qval = query[param.name],
-				val;
+			param = params.all[i];
+			qval = query[param.name];
 
 			if(!qval){
 				val = param.default || param.type();
