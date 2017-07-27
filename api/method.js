@@ -2,9 +2,7 @@
  * Created by Islam on 21.03.2017.
  */
 
-let errors = require('./errors');
-
-class ApiMethod{
+class ApiMethod {
 	constructor(name, opts, executor){
 		opts = opts || {};
 
@@ -72,8 +70,6 @@ class ApiMethod{
 			all: all
 		}
 	}
-
-
 	static prepareParams(query, params){
 		let prepared = Object.create(params),
 			i, param, qval, val;

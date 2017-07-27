@@ -53,6 +53,25 @@ module.exports = class API{
 	}
 };
 
+
+function execMethod(self, method, req, res){
+	let middlewares = self.middlewares;
+	req.method = method;
+	req.context = self.context;
+
+	loop(0);
+
+	function loop(i){
+		if(i < middlewares.length){
+			middlewares[i](req, res, () => {
+				loop(i+1);
+			})
+		}else{
+			method.execute(req, res);
+		}
+	}
+}
+
 function setWS(self, io){
 	io.on('connection', (socket) => {
 		socket.on('api', (data, fn) => {
@@ -74,24 +93,6 @@ function setWS(self, io){
 		}
 		function error(error){
 			fn && fn({error: error});
-		}
-	}
-}
-
-function execMethod(self, method, req, res){
-	let middlewares = self.middlewares;
-	req.method = method;
-	req.context = self.context;
-
-	loop(0);
-
-	function loop(i){
-		if(i < middlewares.length){
-			middlewares[i](req, res, () => {
-				loop(i+1);
-			})
-		}else{
-			method.execute(req, res);
 		}
 	}
 }
