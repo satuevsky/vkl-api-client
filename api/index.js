@@ -13,6 +13,7 @@ module.exports = class API{
 	 * @param {Object} [params.io] - SocketIO server
 	 */
 	constructor(params){
+		params = params || {};
 		this.router = express.Router();
 		this.context = params.context;
 
