@@ -52,6 +52,10 @@ module.exports = class API{
 			execMethod(this, method, req, res);
 		});
 	}
+
+	getRouter(){
+		return this.router;
+	}
 };
 
 
