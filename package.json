@@ -1,5 +1,5 @@
 {
-  "name": "express-api",
+  "name": "express-api-client",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,19 +8,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/satuevsky/express-api.git"
+    "url": "git+https://github.com/satuevsky/express-api-client.git"
   },
   "author": "satuevsky",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/satuevsky/express-api/issues"
+    "url": "https://github.com/satuevsky/express-api-client/issues"
   },
-  "homepage": "https://github.com/satuevsky/express-api#readme",
-  "dependencies": {
-    "express": "^4.15.3"
-  },
-  "devDependencies": {
-    "mocha": "^3.4.2",
-    "request": "^2.81.0"
-  }
+  "homepage": "https://github.com/satuevsky/express-api-client#readme",
 }
