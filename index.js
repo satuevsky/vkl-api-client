@@ -1,3 +1,5 @@
+import ApiClient from './lib/client';
+
 module.exports = {
-	Client: require('./lib/client')
+	Client: ApiClient
 };
