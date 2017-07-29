@@ -1,4 +1,5 @@
 module.exports = {
-	API: require('./api'),
-	Method: require('./api/method')
+	API: require('./lib/server'),
+	Method: require('./lib/method'),
+	Client: require('./lib/client')
 };
