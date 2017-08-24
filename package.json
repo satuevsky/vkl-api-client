@@ -1,6 +1,6 @@
 {
   "name": "vkl-api-client",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "Client for vk-like API",
   "main": "./lib/client.js",
   "scripts": {
