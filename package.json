@@ -1,19 +1,16 @@
 {
-  "name": "express-api-client",
+  "name": "vkl-api-client",
   "version": "1.0.0",
-  "description": "",
+  "description": "Client for vk-like API",
   "main": "./lib/client.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/satuevsky/express-api-client.git"
+    "url": "git+https://github.com/satuevsky/vkl-api-client.git"
   },
   "author": "satuevsky",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/satuevsky/express-api-client/issues"
+    "url": "https://github.com/satuevsky/vkl-api-client/issues"
   },
-  "homepage": "https://github.com/satuevsky/express-api-client#readme"
+  "homepage": "https://github.com/satuevsky/vkl-api-client#readme"
 }
