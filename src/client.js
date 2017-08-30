@@ -26,6 +26,8 @@ class ApiClient{
 			}
 		}
 
+		params.v = params.v || "5.68";
+
 		let query = paramsToQueryString(params),
 			url = this.endpoint + method + (query.length && ('?' + query) || "");
 
