@@ -4,10 +4,12 @@ class ApiClient{
 	 * @param {Object} [params]
 	 * @param {String} [params.endpoint] - api endpoint
 	 * @param {Object} [params.extraParams] - extra parameters for each request
+	 * @param {Function} [params.fetch] - fetch method(for Node)
 	 */
 	constructor(params = {}){
 		this.endpoint = params.endpoint || "";
 		this.extraParams = params.extraParams;
+		this.fetch = params.fetch || window.fetch;
 	}
 
 	call(method, params, callback){
@@ -31,8 +33,8 @@ class ApiClient{
 		let query = paramsToQueryString(params),
 			url = this.endpoint + method + (query.length && ('?' + query) || "");
 
-		return new Promise(function(resolve, reject){
-			fetch(url, {credentials: 'same-origin'})
+		return new Promise((resolve, reject) => {
+			this.fetch(url, {credentials: 'same-origin'})
 				.then(json)
 				.then((res) =>{
 					if(callback){
