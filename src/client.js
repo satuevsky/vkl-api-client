@@ -1,37 +1,38 @@
+//@flow
+
+type FetchAlias = (url: string, options?: Object)=>Promise<Object>;
+
+type ApiClientParams = {
+    endpoint?: string,
+    extraParams?: Object,
+    fetch?: FetchAlias,
+}
+
 class ApiClient{
-	/**
-	 * @param {Object} [params]
-	 * @param {String} [params.endpoint] - api endpoint
-	 * @param {Object} [params.extraParams] - extra parameters for each request
-	 * @param {Boolean|Number} [params.requestsFrequency]
-	 * @param {Function} [params.fetch] - fetch method(for Node)
-	 */
-	constructor(params = {}){
+    endpoint: string;
+    extraParams: ?Object;
+    fetch: FetchAlias;
+    freq: number|null;
+    lastRequestTime: number;
+
+	constructor(params: ApiClientParams = {}){
 		this.endpoint = params.endpoint || "";
 		this.extraParams = params.extraParams;
 		this.freq = params.requestsFrequency ?
 			(typeof params.requestsFrequency === "number" ? params.requestsFrequency : 333) : null;
 		this.lastRequestTime = 0;
-
 		this.fetch = params.fetch || window.fetch.bind(window);
 	}
 
-	/**
-	 * Do request to API
-	 * @param {String} method - Method name
-	 * @param {Object} [params] - Request parameters
-	 * @param [callback] - Callback for request
-	 * @return {Promise}
-	 */
-	call(method, params, callback){
+	call(method: string, params: {}, callback?: (error: ?Object, response: ?any) => void): Promise<any>{
 		return new Promise((resolve, reject) => {
 			let timeout = 0;
 			if(this.freq){
 				let now = Date.now(),
 					diff = now - this.lastRequestTime;
 
-				if(diff < this.freq){
-					timeout = this.freq - diff;
+				if(diff < +this.freq){
+					timeout = +this.freq - diff;
 				}
 				this.lastRequestTime = now + timeout;
 			}
@@ -45,10 +46,12 @@ class ApiClient{
 				}
 
 				if(this.extraParams){
-					let key;
-					for(key in this.extraParams){
+					let key,
+                        extra = this.extraParams;
+
+					for(key in extra){
 						if(this.extraParams.hasOwnProperty(key) && !params.hasOwnProperty(key))
-							params[key] = this.extraParams[key];
+							params[key] = extra[key];
 					}
 				}
 
@@ -84,13 +87,14 @@ function paramsToQueryString(params){
 	let pairs = [],
 		name;
 	for(name in params){
-		let val = params[name];
-		if(val === undefined) continue;
-		pairs.push(name + "=" + encodeURIComponent(val));
+	    if(params.hasOwnProperty(name)){
+            let val = params[name];
+            if(val === undefined) continue;
+            pairs.push(name + "=" + encodeURIComponent(val));
+        }
 	}
 	return pairs.join("&");
 }
-
 
 export default ApiClient;
 

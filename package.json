@@ -4,10 +4,29 @@
   "description": "Client for vk-like API",
   "main": "./lib/client.js",
   "scripts": {
-    "prepublish": "babel src --out-dir lib"
+    "prepack": "npm run prepack:babel && npm run prepack:flow",
+    "prepack:babel": "babel src/ -d lib",
+    "prepack:flow": "flow-copy-source src lib"
   },
   "babel": {
-    "presets": ["es2015"]
+    "presets": [
+      "es2015",
+      "stage-2"
+    ],
+    "plugins": [
+      "transform-flow-strip-types"
+    ]
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-plugin-transform-flow-strip-types": "^6.22.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "flow-bin": "^0.65.0",
+    "flow-copy-source": "^1.3.0",
+    "mocha": "^5.0.1",
+    "node-fetch": "^2.0.0"
   },
   "repository": {
     "type": "git",
@@ -18,10 +37,5 @@
   "bugs": {
     "url": "https://github.com/satuevsky/vkl-api-client/issues"
   },
-  "homepage": "https://github.com/satuevsky/vkl-api-client#readme",
-  "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.0",
-    "babel-preset-es2015": "^6.24.1"
-  }
+  "homepage": "https://github.com/satuevsky/vkl-api-client#readme"
 }
